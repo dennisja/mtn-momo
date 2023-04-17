@@ -1,4 +1,4 @@
-export * from "./client";
+export * from './client';
 export * from './fetchAPIUser';
 export * from './createAPIUser';
 export * from './createAPIKey';
