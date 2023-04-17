@@ -1,5 +1,5 @@
-import { AxiosInstance, HttpStatusCode } from "axios";
-import { v4 } from "uuid";
+import { AxiosInstance, HttpStatusCode } from 'axios';
+import { v4 } from 'uuid';
 
 type CreateAPIUserOptions = {
   /** The link you want some payment operations to redirect to. */
@@ -26,16 +26,16 @@ const createAPIUser = async ({
   const userId = v4();
 
   const response = await client.post(
-    "",
+    '',
     { providerCallbackHost },
-    { headers: { "X-Reference-Id": userId } }
+    { headers: { 'X-Reference-Id': userId } }
   );
 
   if (response.status === HttpStatusCode.Created) {
     return { userId };
   }
 
-  throw new Error("Unknown error occurred when creating a user");
+  throw new Error('Unknown error occurred when creating a user');
 };
 
 export { createAPIUser };

@@ -1,5 +1,5 @@
-import { AxiosInstance, HttpStatusCode } from "axios";
-import type { TargetEnvironment } from "../types";
+import { AxiosInstance, HttpStatusCode } from 'axios';
+import type { TargetEnvironment } from '../types';
 
 type FetchAPIUserOptions = {
   /** A uuid corresponding to the id of the user whose details we have to fetch */
@@ -33,7 +33,7 @@ const fetchAPIUser = async ({
   }
 
   /** TODO: search and see whether there is a reasonable way to do error handling from the docus */
-  throw new Error("Unknown error when fetching user");
+  throw new Error('Unknown error when fetching user');
 };
 
 export { fetchAPIUser };

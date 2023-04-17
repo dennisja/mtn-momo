@@ -1,8 +1,8 @@
-import { TargetEnvironment } from "../types";
-import { createProvisioningClient } from "./client";
-import { createAPIKey } from "./createAPIKey";
-import { createAPIUser } from "./createAPIUser";
-import { fetchAPIUser } from "./fetchAPIUser";
+import { TargetEnvironment } from '../types';
+import { createProvisioningClient } from './client';
+import { createAPIKey } from './createAPIKey';
+import { createAPIUser } from './createAPIUser';
+import { fetchAPIUser } from './fetchAPIUser';
 
 type CreateAPIUserResult = {
   /** The environment which we are accessing. Its always 'sandbox' when in the sandbox environment */
@@ -26,7 +26,7 @@ type CreateAPIUserResult = {
 
 type CreateAPIUserAndKeyOptions = Pick<
   CreateAPIUserResult,
-  "subscriptionKey" | "providerCallbackHost"
+  'subscriptionKey' | 'providerCallbackHost'
 >;
 
 const createAPIUserAndKey = async ({

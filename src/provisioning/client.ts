@@ -1,12 +1,12 @@
-import type { AxiosInstance } from "axios";
+import type { AxiosInstance } from 'axios';
 
 import {
   API_VERSION_PATH,
   BASE_URL,
   createClient,
   urlPathFrom,
-} from "../client";
-import type { APIVersion } from "../types";
+} from '../client';
+import type { APIVersion } from '../types';
 
 let client: AxiosInstance | null;
 
@@ -28,14 +28,14 @@ type CreateProvisioningClientOptions = {
  */
 const createProvisioningClient = ({
   subscriptionKey,
-  apiVersion = "v1",
+  apiVersion = 'v1',
 }: CreateProvisioningClientOptions): AxiosInstance => {
   if (client) return client;
 
   const baseURL = urlPathFrom([
     BASE_URL,
     API_VERSION_PATH[apiVersion],
-    "apiuser",
+    'apiuser',
   ]);
 
   return createClient({ subscriptionKey, baseURL });
