@@ -1,3 +1,4 @@
 {
-  "src/**/*.ts": ["yarn format"]
+  "src/**/*.ts": ["yarn format", "yarn lint"],
+  "**/*.json": ["prettier --write"]
 }
