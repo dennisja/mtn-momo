@@ -17,7 +17,7 @@ type CreateProvisioningClientOptions = {
    */
   subscriptionKey: string;
 
-  /** The version of the api we are accessing. Defaults to v1. At the time of writing of this user provisions only has one version*/
+  /** The version of the api we are accessing. Defaults to v1. At the time of writing of this user provisions only has one version */
   apiVersion?: APIVersion;
 };
 

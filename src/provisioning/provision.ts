@@ -11,7 +11,7 @@ type CreateAPIUserResult = {
   /** The key to be used in the authentication header when requesting for an access token */
   apiKey: string;
 
-  /** A uuid which corresponds to the id of the user to be created*/
+  /** A uuid which corresponds to the id of the user to be created */
   userId: string;
 
   /**

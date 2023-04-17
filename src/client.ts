@@ -14,9 +14,7 @@ const API_VERSION_PATH: Record<APIVersion, string> = {
   v2: V2_PATH,
 };
 
-const urlPathFrom = (paths: string[]): string => {
-  return path.join(...paths);
-};
+const urlPathFrom = (paths: string[]): string => path.join(...paths);
 
 const BASE_URL = 'https://sandbox.momodeveloper.mtn.com';
 
@@ -25,18 +23,14 @@ type ClientOptions = {
   baseURL?: string;
 };
 
-const createClient = ({
-  subscriptionKey,
-  baseURL = BASE_URL,
-}: ClientOptions) => {
-  return axios.create({
+const createClient = ({ subscriptionKey, baseURL = BASE_URL }: ClientOptions) =>
+  axios.create({
     headers: {
       'Content-Type': 'application/json',
       'Ocp-Apim-Subscription-Key': subscriptionKey,
     },
     baseURL,
   });
-};
 
 export {
   API_VERSION_PATH,
