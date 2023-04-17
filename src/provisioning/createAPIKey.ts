@@ -1,5 +1,5 @@
-import { AxiosInstance, HttpStatusCode } from "axios";
-import { urlPathFrom } from "../client";
+import { AxiosInstance, HttpStatusCode } from 'axios';
+import { urlPathFrom } from '../client';
 
 type CreateAPIKeyOptions = {
   /** A uuid which corresponds to the id of the user whose api key is to be created */
@@ -23,7 +23,7 @@ const createAPIKey = async ({
   userId,
   client,
 }: CreateAPIKeyOptions): Promise<CreateAPIKeyResult> => {
-  const path = urlPathFrom([userId, "apikey"]);
+  const path = urlPathFrom([userId, 'apikey']);
 
   const res = await client.post<CreateAPIKeyResult>(path);
 
@@ -31,7 +31,7 @@ const createAPIKey = async ({
     return { apiKey: res.data.apiKey };
   }
 
-  throw new Error("An unknown error occurred when fetching the api key");
+  throw new Error('An unknown error occurred when fetching the api key');
 };
 
 export { createAPIKey };
