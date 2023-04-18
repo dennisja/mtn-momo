@@ -1,4 +1,4 @@
 {
-  "src/**/*.ts": ["yarn format", "yarn lint", "yarn test"],
+  "src/**/*.ts": ["yarn format", "yarn lint", "yarn test related --run"],
   "**/*.json": ["prettier --write"]
 }

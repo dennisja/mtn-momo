@@ -1,7 +1,7 @@
 import { AxiosInstance, HttpStatusCode } from 'axios';
 import { describe, it, vi, expect } from 'vitest';
 
-import { CREATE_API_KEY_UNKNOwN_ERROR, createAPIKey } from '../createAPIKey';
+import { CREATE_API_KEY_UNKNOWN_ERROR, createAPIKey } from '../createAPIKey';
 
 describe('createAPIKey', () => {
   it('should create and return API key', async () => {
@@ -49,7 +49,7 @@ describe('createAPIKey', () => {
       });
 
     expect(createAPIKeyFunctionCall).rejects.toThrow(
-      CREATE_API_KEY_UNKNOwN_ERROR
+      CREATE_API_KEY_UNKNOWN_ERROR
     );
   });
 });

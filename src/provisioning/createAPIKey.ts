@@ -1,8 +1,7 @@
 import { AxiosInstance, HttpStatusCode } from 'axios';
 import { urlPathFrom } from '../client';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const CREATE_API_KEY_UNKNOwN_ERROR =
+const CREATE_API_KEY_UNKNOWN_ERROR =
   'An unknown error occurred when fetching the api key';
 
 type CreateAPIKeyOptions = {
@@ -35,7 +34,7 @@ const createAPIKey = async ({
     return { apiKey: res.data.apiKey };
   }
 
-  throw new Error(CREATE_API_KEY_UNKNOwN_ERROR);
+  throw new Error(CREATE_API_KEY_UNKNOWN_ERROR);
 };
 
-export { createAPIKey, CREATE_API_KEY_UNKNOwN_ERROR };
+export { createAPIKey, CREATE_API_KEY_UNKNOWN_ERROR };

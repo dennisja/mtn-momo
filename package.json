@@ -27,6 +27,7 @@
     "prepare": "husky install",
     "lint": "eslint src --ext .ts",
     "test": "vitest",
+    "test:ci": "vitest --run",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
