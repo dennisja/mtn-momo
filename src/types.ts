@@ -3,7 +3,13 @@ enum TargetEnvironment {
   Production = 'production',
 }
 
+enum Product {
+  Collection = 'collection',
+  Disbursement = 'disbursement',
+  Remittance = 'remittance',
+}
+
 type APIVersion = 'v1' | 'v2';
 
-export { TargetEnvironment };
+export { TargetEnvironment, Product };
 export type { APIVersion };

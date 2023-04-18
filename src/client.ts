@@ -18,16 +18,29 @@ const urlPathFrom = (paths: string[]): string => path.join(...paths);
 
 const BASE_URL = 'https://sandbox.momodeveloper.mtn.com';
 
-type ClientOptions = {
-  subscriptionKey: string;
-  baseURL?: string;
+type HeaderOverrides = {
+  'Content-Type'?: string;
+  'X-Target-Environment'?: string;
+  Authorization?: string;
 };
 
-const createClient = ({ subscriptionKey, baseURL = BASE_URL }: ClientOptions) =>
+type ClientOptions = {
+  subscriptionKey: string;
+
+  baseURL?: string;
+  headerOverrides?: HeaderOverrides;
+};
+
+const createClient = ({
+  subscriptionKey,
+  baseURL = BASE_URL,
+  headerOverrides,
+}: ClientOptions) =>
   axios.create({
     headers: {
       'Content-Type': 'application/json',
       'Ocp-Apim-Subscription-Key': subscriptionKey,
+      ...headerOverrides,
     },
     baseURL,
   });
