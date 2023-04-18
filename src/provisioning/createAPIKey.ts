@@ -1,6 +1,9 @@
 import { AxiosInstance, HttpStatusCode } from 'axios';
 import { urlPathFrom } from '../client';
 
+const CREATE_API_KEY_UNKNOWN_ERROR =
+  'An unknown error occurred when fetching the api key';
+
 type CreateAPIKeyOptions = {
   /** A uuid which corresponds to the id of the user whose api key is to be created */
   userId: string;
@@ -31,7 +34,7 @@ const createAPIKey = async ({
     return { apiKey: res.data.apiKey };
   }
 
-  throw new Error('An unknown error occurred when fetching the api key');
+  throw new Error(CREATE_API_KEY_UNKNOWN_ERROR);
 };
 
-export { createAPIKey };
+export { createAPIKey, CREATE_API_KEY_UNKNOWN_ERROR };
