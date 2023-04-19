@@ -1,20 +1,32 @@
 import { AxiosInstance } from 'axios';
 
 import { BASE_URL, createClient, urlPathFrom } from '../client';
-import { APIVersion, Product, TargetEnvironment } from '../types';
+import { Product, TargetEnvironment } from '../types';
 
 type CreateTokenClientOptions = {
-  subscriptionKey: string;
-  targetEnvironment: TargetEnvironment;
+  /** The product you want to generate an authentication token for */
   targetProduct: Product;
-  userId: string;
-  apiKey: string;
 
-  apiVersion?: APIVersion;
+  /** Subscription key which provides access to a target product API. Its is the primary key of each product */
+  subscriptionKey: string;
+
+  /** The environment we are targeting. Can either be 'sandbox or production' */
+  targetEnvironment: TargetEnvironment;
+
+  /** The id of the api user */
+  userId: string;
+
+  /** The apiKey of the user */
+  apiKey: string;
 };
 
 let client: AxiosInstance | null;
 
+/**
+ * Creates a client to use when generating authentication tokens
+ * @param {CreateTokenClientOptions} options options to use when creating a token generating client
+ * @returns {AxiosInstance} the client you can use to talk to token generation endpoints
+ */
 const createTokenClient = ({
   subscriptionKey,
   targetEnvironment,

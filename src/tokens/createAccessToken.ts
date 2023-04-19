@@ -1,8 +1,6 @@
-import { AxiosInstance } from 'axios';
+import { CreateTokenClientOptions, createTokenClient } from './client';
 
-type CreateAccessTokenOptions = {
-  client: AxiosInstance;
-};
+type CreateAccessTokenOptions = CreateTokenClientOptions;
 
 type CreateAccessTokenRequestResponse = {
   access_token: string;
@@ -11,14 +9,25 @@ type CreateAccessTokenRequestResponse = {
 };
 
 type CreateAccessTokenResult = {
+  /** The authentication token you will use to access other endpoints */
   accessToken: string;
+
+  /** The  token type */
   tokenType: string;
+
+  /** The validity time in seconds of the token. */
   expiresIn: number;
 };
 
-const createAccessToken = async ({
-  client,
-}: CreateAccessTokenOptions): Promise<CreateAccessTokenResult> => {
+/**
+ * Create an access token which can then be used to authorize and authenticate towards the other end-points of the API. Throws errors from the API when request is not successful
+ * @param {CreateAccessTokenOptions} options the properties you need to create an access token
+ * @returns {Promise<CreateAccessTokenResult>} the access token details
+ */
+const createAccessToken = async (
+  options: CreateAccessTokenOptions
+): Promise<CreateAccessTokenResult> => {
+  const client = createTokenClient(options);
   const { data } = await client.post<CreateAccessTokenRequestResponse>(
     '/token/'
   );
