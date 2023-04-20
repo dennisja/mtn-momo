@@ -9,7 +9,7 @@ describe('createProvisioningClient', () => {
       subscriptionKey: mockSubscriptionKey,
     });
     expect(client.defaults.baseURL).toBe(
-      'https:/sandbox.momodeveloper.mtn.com/v1_0/apiuser'
+      'https://sandbox.momodeveloper.mtn.com/v1_0/apiuser'
     );
     expect(client.defaults.headers).toMatchObject({
       'Content-Type': 'application/json',
