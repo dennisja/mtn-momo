@@ -32,11 +32,8 @@ const createProvisioningClient = ({
 }: CreateProvisioningClientOptions): AxiosInstance => {
   if (client) return client;
 
-  const baseURL = urlPathFrom([
-    BASE_URL,
-    API_VERSION_PATH[apiVersion],
-    'apiuser',
-  ]);
+  const baseURL =
+    BASE_URL + urlPathFrom([API_VERSION_PATH[apiVersion], 'apiuser']);
 
   return createClient({ subscriptionKey, baseURL });
 };

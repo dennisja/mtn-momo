@@ -16,7 +16,7 @@ const API_VERSION_PATH: Record<APIVersion, string> = {
 
 const urlPathFrom = (paths: string[]): string => path.join(...paths);
 
-const BASE_URL = 'https://sandbox.momodeveloper.mtn.com';
+const BASE_URL = 'https://sandbox.momodeveloper.mtn.com/';
 
 type HeaderOverrides = {
   'Content-Type'?: string;

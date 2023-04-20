@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 
-import { BASE_URL, createClient, urlPathFrom } from '../client';
+import { BASE_URL, createClient } from '../client';
 import { Product, TargetEnvironment } from '../types';
 
 type CreateTokenClientOptions = {
@@ -20,10 +20,10 @@ type CreateTokenClientOptions = {
   apiKey: string;
 };
 
-let client: AxiosInstance | null;
+const clientCache: Partial<Record<Product, AxiosInstance>> = {};
 
 /**
- * Creates a client to use when generating authentication tokens
+ * Creates a client to use when generating authentication tokens. Ensures a single client is created for the same product.
  * @param {CreateTokenClientOptions} options options to use when creating a token generating client
  * @returns {AxiosInstance} the client you can use to talk to token generation endpoints
  */
@@ -34,12 +34,14 @@ const createTokenClient = ({
   userId,
   apiKey,
 }: CreateTokenClientOptions): AxiosInstance => {
+  let client = clientCache[targetProduct];
+
   if (client) return client;
 
-  const baseURL = urlPathFrom([BASE_URL, targetProduct]);
+  const baseURL = BASE_URL + targetProduct;
   const authToken = Buffer.from(`${userId}:${apiKey}`).toString('base64');
 
-  return createClient({
+  client = createClient({
     subscriptionKey,
     headerOverrides: {
       'X-Target-Environment': targetEnvironment,
@@ -47,6 +49,9 @@ const createTokenClient = ({
     },
     baseURL,
   });
+
+  clientCache[targetProduct] = client;
+  return client;
 };
 
 export { createTokenClient };
