@@ -9,7 +9,7 @@ type TokenDetails = CreateAccessTokenResult;
 
 type TokenDetailsVariant = Product;
 
-let tokenCache: Partial<Record<TokenDetailsVariant, TokenDetails>>;
+const tokenCache: Partial<Record<TokenDetailsVariant, TokenDetails>> = {};
 
 const createOrRefreshAccessToken = async (
   options: CreateAccessTokenOptions

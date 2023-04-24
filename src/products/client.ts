@@ -20,7 +20,7 @@ type CreateProductClientOptions = {
 
 type Client = `${Product}-${APIVersion}`;
 
-let clientCache: Partial<Record<Client, AxiosInstance>>;
+const clientCache: Partial<Record<Client, AxiosInstance>> = {};
 
 const createProductClient = ({
   subscriptionKey,
