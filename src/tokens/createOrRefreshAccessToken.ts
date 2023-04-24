@@ -5,13 +5,11 @@ import {
   CreateAccessTokenResult,
 } from './createAccessToken';
 
-type TokenDetails = CreateAccessTokenResult & { expiresAt: number };
+type TokenDetails = CreateAccessTokenResult;
 
-type TokenDetailsVariant = `${Product}`;
+type TokenDetailsVariant = Product;
 
 let tokenCache: Partial<Record<TokenDetailsVariant, TokenDetails>>;
-
-const EXPIRY_OFFSET = 30000; // 30 seconds
 
 const createOrRefreshAccessToken = async (
   options: CreateAccessTokenOptions
@@ -20,10 +18,7 @@ const createOrRefreshAccessToken = async (
   const isExpired = Date.now() > (tokenDetails?.expiresAt || 0);
 
   if (!tokenDetails || isExpired) {
-    const accessTokenDetails = await createAccessToken(options);
-    const { expiresIn } = accessTokenDetails;
-    const expiresAt = Date.now() + expiresIn * 1000 - EXPIRY_OFFSET;
-    tokenDetails = { ...accessTokenDetails, expiresAt };
+    tokenDetails = await createAccessToken(options);
     tokenCache[options.targetProduct] = tokenDetails;
   }
 
