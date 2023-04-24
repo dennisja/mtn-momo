@@ -69,3 +69,4 @@ const createProductClient = ({
 };
 
 export { createProductClient };
+export type { CreateProductClientOptions };
