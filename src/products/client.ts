@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosRequestHeaders } from 'axios';
+import { AxiosInstance } from 'axios';
 
 import {
   API_VERSION_PATH,
@@ -7,7 +7,8 @@ import {
   urlPathFrom,
 } from '../client';
 import { APIVersion, Product, TargetEnvironment } from '../types';
-import { createOrRefreshAccessToken } from '../tokens/createOrRefreshAccessToken';
+
+import { withAuthorization } from './withAuthorization';
 
 type CreateProductClientOptions = {
   subscriptionKey: string;
@@ -46,23 +47,15 @@ const createProductClient = ({
     baseURL,
   });
 
-  // we don't want this to run at client creation time but at the time a request is made
-  client.interceptors.request.use(async (request) => {
-    const { accessToken } = await createOrRefreshAccessToken({
-      subscriptionKey,
-      targetEnvironment,
-      targetProduct,
+  withAuthorization({
+    client,
+    config: {
       apiKey,
       userId,
-    });
-
-    return {
-      ...request,
-      headers: {
-        ...request.headers,
-        Authorization: `Bearer ${accessToken}`,
-      } as AxiosRequestHeaders,
-    };
+      targetProduct,
+      subscriptionKey,
+      targetEnvironment,
+    },
   });
 
   clientCache[clientKey] = client;

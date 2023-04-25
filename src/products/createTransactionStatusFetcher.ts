@@ -86,9 +86,9 @@ type TransactionStatusFetcherOptions = {
   referenceId: string;
 };
 
-type FetchTransactionStatus<T extends Product> = {
-  (options: TransactionStatusFetcherOptions): Promise<Transaction<T>>;
-};
+type FetchTransactionStatus<T extends Product> = (
+  options: TransactionStatusFetcherOptions
+) => Promise<Transaction<T>>;
 
 type CreateTransactionStatusFetcher = <T extends Product>(
   options: CreateTransactionStatusFetcherOptions<T>
