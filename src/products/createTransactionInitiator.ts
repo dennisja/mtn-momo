@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 import { Product } from '../types';
 
 import { PRODUCT_URL_PATHS } from './utils';
-import { Party } from './types';
+import { TransactionParty } from './types';
 
 type RequestToPayResult = {
   /**
@@ -15,7 +15,7 @@ type RequestToPayResult = {
   referenceId: string;
 };
 
-type RequestToPayOptions = {
+type RequestToPayOptions<T extends Product> = {
   /** Amount that will be debited from the payer account. */
   amount: string;
 
@@ -30,11 +30,6 @@ type RequestToPayOptions = {
    */
   externalId: string;
 
-  /**
-   * Details of the account holder in the wallet platform
-   */
-  payer: Party;
-
   /** Message that will be written in the payer transaction history message field. */
   payerMessage: string;
 
@@ -43,7 +38,7 @@ type RequestToPayOptions = {
 
   /**  URL to the server where the callback should be sent. */
   callbackURL?: string;
-};
+} & TransactionParty<T>;
 
 type CreateTransactionInitiatorOptions<T extends Product> = {
   /**
@@ -56,13 +51,13 @@ type CreateTransactionInitiatorOptions<T extends Product> = {
   targetProduct: T;
 };
 
-type InitiateTransaction = (
-  options: RequestToPayOptions
+type InitiateTransaction<T extends Product> = (
+  options: RequestToPayOptions<T>
 ) => Promise<RequestToPayResult>;
 
 type TransactionInitiatorCreator = <T extends Product>(
   options: CreateTransactionInitiatorOptions<T>
-) => InitiateTransaction;
+) => InitiateTransaction<T>;
 
 /**
  * Creates a function to initiate an payment.

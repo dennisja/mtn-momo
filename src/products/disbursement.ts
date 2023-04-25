@@ -11,12 +11,12 @@ type CreateDisbursementAPIResult = {
   /**
    * Transfer operation is used to transfer an amount from the own account to a payee account.
    */
-  transfer: InitiateTransaction;
+  transfer: InitiateTransaction<Product.Disbursement>;
 
   /**
    * This operation is used to get the status of a transfer.
    */
-  getTransferStatus: FetchTransactionStatus<Product.Remittance>;
+  getTransferStatus: FetchTransactionStatus<Product.Disbursement>;
 };
 
 type CreateDisbursementAPIOptions = Omit<

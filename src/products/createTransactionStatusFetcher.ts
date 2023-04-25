@@ -1,10 +1,10 @@
 import { AxiosInstance } from 'axios';
 
-import { Product } from '../types';
-import { PRODUCT_URL_PATHS } from './utils';
 import { urlPathFrom } from '../client';
+import { Product } from '../types';
 
-import { Party } from './types';
+import { TransactionParty } from './types';
+import { PRODUCT_URL_PATHS } from './utils';
 
 const TransactionStatusReasonCodes = [
   'PAYEE_NOT_FOUND',
@@ -35,17 +35,6 @@ type TransactionStatus =
   | 'FAILED'
   | 'TIMEOUT'
   | 'REJECTED';
-
-type TransactionParty<TargetProduct extends Product> =
-  TargetProduct extends Product.Collection
-    ? {
-        /** The paying party in the wallet platform */
-        payer: Party;
-      }
-    : {
-        /** The party being paid in the wallet platform */
-        payee: Party;
-      };
 
 type Transaction<TargetProduct extends Product> = {
   /** Amount that will be debited from the payer account */
@@ -97,18 +86,19 @@ type TransactionStatusFetcherOptions = {
   referenceId: string;
 };
 
-type FetchTransactionStatus<T extends Product> = (
-  options: TransactionStatusFetcherOptions
-) => Promise<Transaction<T>>;
+type FetchTransactionStatus<T extends Product> = {
+  (options: TransactionStatusFetcherOptions): Promise<Transaction<T>>;
+};
 
-const createTransactionStatusFetcher =
-  <T extends Product>({
-    client,
-    targetProduct,
-  }: CreateTransactionStatusFetcherOptions<T>) =>
-  async ({ referenceId }: { referenceId: string }): Promise<Transaction<T>> => {
+type CreateTransactionStatusFetcher = <T extends Product>(
+  options: CreateTransactionStatusFetcherOptions<T>
+) => FetchTransactionStatus<T>;
+
+const createTransactionStatusFetcher: CreateTransactionStatusFetcher =
+  ({ client, targetProduct }) =>
+  async ({ referenceId }) => {
     const path = urlPathFrom([PRODUCT_URL_PATHS[targetProduct], referenceId]);
-    const response = await client.get<Transaction<T>>(path);
+    const response = await client.get(path);
     return response.data;
   };
 

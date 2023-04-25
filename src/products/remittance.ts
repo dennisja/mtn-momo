@@ -16,7 +16,7 @@ type CreateRemittanceAPIResult = {
   /**
    * Transfer operation is used to transfer an amount from the own account to a payee account.
    */
-  transfer: InitiateTransaction;
+  transfer: InitiateTransaction<Product.Remittance>;
 
   /**
    * This operation is used to get the status of a transfer.

@@ -1,3 +1,5 @@
+import { Product } from '../types';
+
 enum PartyIDVariant {
   MSISDN = 'MSISDN',
   EMAIL = 'EMAIL',
@@ -17,5 +19,16 @@ type Party = {
   partyId: string;
 };
 
+type TransactionParty<TargetProduct extends Product> =
+  TargetProduct extends Product.Collection
+    ? {
+        /** The paying party in the wallet platform */
+        payer: Party;
+      }
+    : {
+        /** The party being paid in the wallet platform */
+        payee: Party;
+      };
+
 export type { Party };
-export { PartyIDVariant };
+export { PartyIDVariant, TransactionParty };

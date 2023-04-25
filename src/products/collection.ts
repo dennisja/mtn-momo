@@ -19,7 +19,7 @@ type CreateCollectionAPIResult = {
    * The requesttopay will be in status PENDING until the transaction is authorized or declined by the payer or it is timed out by the system.
    * Status of the transaction can be validated by using the requestToPayTransactionStatus method
    */
-  requestToPay: InitiateTransaction;
+  requestToPay: InitiateTransaction<Product.Collection>;
 
   /**
    * This operation is used to get the status of a request to pay

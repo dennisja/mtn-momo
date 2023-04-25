@@ -46,6 +46,7 @@ const createProductClient = ({
     baseURL,
   });
 
+  // we don't want this to run at client creation time but at the time a request is made
   client.interceptors.request.use(async (request) => {
     const { accessToken } = await createOrRefreshAccessToken({
       subscriptionKey,
