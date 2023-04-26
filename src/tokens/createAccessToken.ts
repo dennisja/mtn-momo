@@ -1,5 +1,10 @@
 import { CreateTokenClientOptions, createTokenClient } from './client';
 
+const EXPIRY_OFFSET = 30000; // 30 seconds
+
+const expiresInToExpiresAt = (expiresIn: number): number =>
+  Date.now() + expiresIn * 1000 - EXPIRY_OFFSET;
+
 type CreateAccessTokenOptions = CreateTokenClientOptions;
 
 type CreateAccessTokenRequestResponse = {
@@ -17,6 +22,9 @@ type CreateAccessTokenResult = {
 
   /** The validity time in seconds of the token. */
   expiresIn: number;
+
+  /** The timestamp in milliseconds at which the token will expiry offset by 30 secs */
+  expiresAt: number;
 };
 
 /**
@@ -31,12 +39,14 @@ const createAccessToken = async (
   const { data } = await client.post<CreateAccessTokenRequestResponse>(
     '/token/'
   );
+  const expiresAt = expiresInToExpiresAt(data.expires_in);
   return {
+    expiresAt,
     accessToken: data.access_token,
     tokenType: data.token_type,
     expiresIn: data.expires_in,
   };
 };
 
-export { createAccessToken };
+export { createAccessToken, expiresInToExpiresAt };
 export type { CreateAccessTokenResult, CreateAccessTokenOptions };
