@@ -9,6 +9,7 @@
     /* JavaScript Support */
 
     /* Emit */
+    "noEmit": true,
 
     /* Interop Constraints */
     "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
