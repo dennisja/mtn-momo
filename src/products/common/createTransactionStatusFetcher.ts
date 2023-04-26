@@ -1,10 +1,10 @@
 import { AxiosInstance } from 'axios';
 
-import { urlPathFrom } from '../client';
-import { Product } from '../types';
+import { urlPathFrom } from '../../client';
+import { Product } from '../../types';
 
 import { TransactionParty } from './types';
-import { PRODUCT_URL_PATHS } from './utils';
+import { TRANSACTION_URL_PATHS } from './utils';
 
 const TransactionStatusReasonCodes = [
   'PAYEE_NOT_FOUND',
@@ -97,7 +97,10 @@ type CreateTransactionStatusFetcher = <T extends Product>(
 const createTransactionStatusFetcher: CreateTransactionStatusFetcher =
   ({ client, targetProduct }) =>
   async ({ referenceId }) => {
-    const path = urlPathFrom([PRODUCT_URL_PATHS[targetProduct], referenceId]);
+    const path = urlPathFrom([
+      TRANSACTION_URL_PATHS[targetProduct],
+      referenceId,
+    ]);
     const response = await client.get(path);
     return response.data;
   };

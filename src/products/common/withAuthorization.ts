@@ -1,6 +1,7 @@
 import { AxiosInstance, AxiosRequestHeaders } from 'axios';
-import { createOrRefreshAccessToken } from '../tokens/createOrRefreshAccessToken';
-import { CreateAccessTokenOptions } from '../tokens';
+
+import { createOrRefreshAccessToken } from '../../tokens/createOrRefreshAccessToken';
+import { CreateAccessTokenOptions } from '../../tokens';
 
 const withAuthorization = ({
   client,

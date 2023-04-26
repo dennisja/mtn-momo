@@ -64,7 +64,8 @@ data = {
 ### Creating tokens
 
 - **Access token**
-  This is a token you can use to access other endpoints of the API. You can create an access token for each product by using the `createAccessToken` method
+
+  This is a token you can use to access other endpoints of the API. You can create an access token for each product by using the `createAccessToken` method. You will barely use this method as creating and regenerating a token when the created one is expired is dealt with by the [API endpoint utilities](#api-endpoints).
 
 ```js
 import { createAccessToken, TargetEnvironment } from '@dennisja/mtn-momo';

@@ -1,11 +1,11 @@
 import { Product } from '../types';
 
-import { createProductClient } from './client';
-import type { CreateProductClientOptions } from './client';
-import { createTransactionInitiator } from './createTransactionInitiator';
-import type { InitiateTransaction } from './createTransactionInitiator';
-import { createTransactionStatusFetcher } from './createTransactionStatusFetcher';
-import type { FetchTransactionStatus } from './createTransactionStatusFetcher';
+import { createProductClient } from './common/client';
+import type { CreateProductClientOptions } from './common/client';
+import { createTransactionInitiator } from './common/createTransactionInitiator';
+import type { InitiateTransaction } from './common/createTransactionInitiator';
+import { createTransactionStatusFetcher } from './common/createTransactionStatusFetcher';
+import type { FetchTransactionStatus } from './common/createTransactionStatusFetcher';
 
 type CreateRemittanceAPIOptions = Omit<
   CreateProductClientOptions,

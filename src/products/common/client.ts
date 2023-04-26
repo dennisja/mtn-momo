@@ -5,8 +5,8 @@ import {
   BASE_URL,
   createClient,
   urlPathFrom,
-} from '../client';
-import { APIVersion, Product, TargetEnvironment } from '../types';
+} from '../../client';
+import { APIVersion, Product, TargetEnvironment } from '../../types';
 
 import { withAuthorization } from './withAuthorization';
 

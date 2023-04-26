@@ -1,9 +1,9 @@
 import { AxiosInstance } from 'axios';
 import { v4 } from 'uuid';
 
-import { Product } from '../types';
+import { Product } from '../../types';
 
-import { PRODUCT_URL_PATHS } from './utils';
+import { TRANSACTION_URL_PATHS } from './utils';
 import { TransactionParty } from './types';
 
 type RequestToPayResult = {
@@ -70,7 +70,7 @@ const createTransactionInitiator: TransactionInitiatorCreator =
   ({ client, targetProduct }) =>
   async ({ callbackURL, ...body }) => {
     const referenceId = v4();
-    const path = PRODUCT_URL_PATHS[targetProduct];
+    const path = TRANSACTION_URL_PATHS[targetProduct];
     await client.post(path, body, {
       headers: { 'X-Callback-Url': callbackURL, 'X-Reference-Id': referenceId },
     });

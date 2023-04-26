@@ -1,4 +1,4 @@
-import { Product } from '../types';
+import { Product } from '../../types';
 
 enum PartyIDVariant {
   MSISDN = 'MSISDN',
@@ -15,7 +15,7 @@ type Party = {
    */
   partyIdType: PartyIDVariant;
 
-  /** */
+  /** The id of the party. Should be of the party Id type i.e if partyId type is MSISDN, partyId should be a MSISDN */
   partyId: string;
 };
 
