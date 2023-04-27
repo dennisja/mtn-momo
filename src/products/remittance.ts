@@ -2,6 +2,10 @@ import { Product } from '../types';
 
 import { createProductClient } from './common/client';
 import type { CreateProductClientOptions } from './common/client';
+import {
+  FetchAccountBalance,
+  createAccountBalanceFetcher,
+} from './common/createAccountBalanceFetcher';
 import { createTransactionInitiator } from './common/createTransactionInitiator';
 import type { InitiateTransaction } from './common/createTransactionInitiator';
 import { createTransactionStatusFetcher } from './common/createTransactionStatusFetcher';
@@ -22,6 +26,9 @@ type CreateRemittanceAPIResult = {
    * This operation is used to get the status of a transfer.
    */
   getTransferStatus: FetchTransactionStatus<Product.Remittance>;
+
+  /** Get the balance of the account */
+  getAccountBalance: FetchAccountBalance;
 };
 
 const createRemittanceAPI = (
@@ -42,7 +49,9 @@ const createRemittanceAPI = (
     targetProduct: Product.Remittance,
   });
 
-  return { transfer, getTransferStatus };
+  const getAccountBalance = createAccountBalanceFetcher({ client });
+
+  return { transfer, getTransferStatus, getAccountBalance };
 };
 
 export { createRemittanceAPI };
