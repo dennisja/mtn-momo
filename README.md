@@ -205,7 +205,8 @@ const accessTokenDetails = createAccessToken({
     ```
 
     - ##### Get Account balance
-      This operation gets the balance of the account and is fully documented [here](https://momodeveloper.mtn.com/docs/services/remittance/operations/GetAccountBalance?)
+
+    This operation gets the balance of the account and is fully documented [here](https://momodeveloper.mtn.com/docs/services/remittance/operations/GetAccountBalance?)
 
     ```ts
     // fetch user Account balance
