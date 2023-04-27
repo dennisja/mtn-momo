@@ -10,6 +10,8 @@ import { createTransactionInitiator } from './common/createTransactionInitiator'
 import type { InitiateTransaction } from './common/createTransactionInitiator';
 import { createTransactionStatusFetcher } from './common/createTransactionStatusFetcher';
 import type { FetchTransactionStatus } from './common/createTransactionStatusFetcher';
+import { createValidateAccountHolderStatus } from './common/createValidateAccountHolderStatus';
+import type { ValidateAccountHolderStatus } from './common/createValidateAccountHolderStatus';
 
 type CreateRemittanceAPIOptions = Omit<
   CreateProductClientOptions,
@@ -32,6 +34,9 @@ type CreateRemittanceAPIResult = {
 
   /** This operation returns personal information of the account holder. The operation does not need any consent by the account holder. */
   getBasicUserInfo: FetchBasicUserInfo;
+
+  /** This operation is used to check if an account holder is registered and active in the system. */
+  validateAccountHolderStatus: ValidateAccountHolderStatus;
 };
 
 const createRemittanceAPI = (
@@ -56,7 +61,17 @@ const createRemittanceAPI = (
 
   const getBasicUserInfo = createBasicUserInfoFetcher({ client });
 
-  return { transfer, getTransferStatus, getAccountBalance, getBasicUserInfo };
+  const validateAccountHolderStatus = createValidateAccountHolderStatus({
+    client,
+  });
+
+  return {
+    transfer,
+    getTransferStatus,
+    getAccountBalance,
+    getBasicUserInfo,
+    validateAccountHolderStatus,
+  };
 };
 
 export { createRemittanceAPI };
