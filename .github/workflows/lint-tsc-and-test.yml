@@ -1,6 +1,6 @@
 name: Lint, Type check and Test
 
-description: 'Runs linter, checks types and runs tests after a pull request is created'
+# description: 'Runs linter, checks types and runs tests after a pull request is created'
 
 on:
   pull_request:
@@ -14,20 +14,20 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@main
-    
+
       - name: Setup Node.js 16.x
-          uses: actions/setup-node@v3
-          with:
-            node-version: 16.x
-      
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
       - name: Install Dependencies
         run: yarn
 
       - name: Lint
         run: yarn lint
-      
+
       - name: Type check
         run: yarn tsc
-      
+
       - test: Test
-        run: yarn test:ci 
+        run: yarn test:ci
