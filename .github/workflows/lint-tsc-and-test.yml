@@ -1,8 +1,10 @@
 name: Lint, Type check and Test
 
 on:
-  pull_request:
-    types: [opened]
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches-ignore:
+      - 'main'
 
 jobs:
   lint-tsc-test:
@@ -27,5 +29,5 @@ jobs:
       - name: Type check
         run: yarn tsc
 
-      - test: Test
+      - name: Test
         run: yarn test:ci
