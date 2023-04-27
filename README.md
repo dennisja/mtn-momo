@@ -215,7 +215,7 @@ const accessTokenDetails = createAccessToken({
     });
     ```
 
-    - ##### Get Account balance
+  - ##### Get Account balance
 
     This operation gets the balance of the account and is fully documented [here](https://momodeveloper.mtn.com/docs/services/remittance/operations/GetAccountBalance?)
 
@@ -224,7 +224,7 @@ const accessTokenDetails = createAccessToken({
     const accountBalance = await remittanceAPI.getAccountBalance(); // returns the availableBalance and currency
     ```
 
-    - ##### Get Basic user info
+  - ##### Get Basic user info
 
     This operation returns personal information of the account holder. The operation does not need any consent by the account holder and is fully documented [here](https://momodeveloper.mtn.com/docs/services/remittance/operations/GetBasicUserinfo?)
 

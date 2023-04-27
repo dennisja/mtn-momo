@@ -74,8 +74,13 @@ const createBasicUserInfoFetcher =
     const { data } = await client.get<BasicUserInfoResult>(
       `accountholder/msisdn/${accountHolderMSISDN}/basicuserinfo`
     );
+    const { sub, status, gender, name, locale } = data;
     return {
-      ...data,
+      sub,
+      status,
+      gender,
+      name,
+      locale,
       birthDate: data.birthdate,
       givenName: data.given_name,
       familyName: data.family_name,
