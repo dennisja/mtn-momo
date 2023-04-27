@@ -147,6 +147,17 @@ const accessTokenDetails = createAccessToken({
   const accountBalance = await collectionAPI.getAccountBalance(); // returns the availableBalance and currency
   ```
 
+  - ##### Get Basic user info
+
+    This operation returns personal information of the account holder. The operation does not need any consent by the account holder and is fully documented [here](https://momodeveloper.mtn.com/docs/services/collection/operations/GetBasicUserinfo?)
+
+    ```ts
+    // fetch user information associated with the given phone number
+    const accountBalance = await collectionAPI.getBasicUserInfo({
+      accountHolderMSISDN: '256779840633',
+    });
+    ```
+
 - #### **Remittance API**
 
   - ##### Create remittance API
@@ -204,13 +215,24 @@ const accessTokenDetails = createAccessToken({
     });
     ```
 
-    - ##### Get Account balance
+  - ##### Get Account balance
 
     This operation gets the balance of the account and is fully documented [here](https://momodeveloper.mtn.com/docs/services/remittance/operations/GetAccountBalance?)
 
     ```ts
     // fetch user Account balance
     const accountBalance = await remittanceAPI.getAccountBalance(); // returns the availableBalance and currency
+    ```
+
+  - ##### Get Basic user info
+
+    This operation returns personal information of the account holder. The operation does not need any consent by the account holder and is fully documented [here](https://momodeveloper.mtn.com/docs/services/remittance/operations/GetBasicUserinfo?)
+
+    ```ts
+    // fetch user information associated with the given phone number
+    const accountBalance = await remittanceAPI.getBasicUserInfo({
+      accountHolderMSISDN: '256779840633',
+    });
     ```
 
 - #### **Disbursement API**
@@ -277,4 +299,15 @@ const accessTokenDetails = createAccessToken({
     ```ts
     // fetch user Account balance
     const accountBalance = await disbursementAPI.getAccountBalance(); // returns the availableBalance and currency
+    ```
+
+  - ##### Get Basic user info
+
+    This operation returns personal information of the account holder. The operation does not need any consent by the account holder and is fully documented [here](https://momodeveloper.mtn.com/docs/services/disbursement/operations/GetBasicUserinfo?)
+
+    ```ts
+    // fetch user information associated with the given phone number
+    const accountBalance = await disbursementAPI.getBasicUserInfo({
+      accountHolderMSISDN: '256779840633',
+    });
     ```

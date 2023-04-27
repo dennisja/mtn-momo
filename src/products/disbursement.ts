@@ -2,10 +2,10 @@ import { Product } from '../types';
 
 import { createProductClient } from './common/client';
 import type { CreateProductClientOptions } from './common/client';
-import {
-  FetchAccountBalance,
-  createAccountBalanceFetcher,
-} from './common/createAccountBalanceFetcher';
+import { createAccountBalanceFetcher } from './common/createAccountBalanceFetcher';
+import type { FetchAccountBalance } from './common/createAccountBalanceFetcher';
+import { createBasicUserInfoFetcher } from './common/createGetBasicUserInfo';
+import type { FetchBasicUserInfo } from './common/createGetBasicUserInfo';
 import { createTransactionInitiator } from './common/createTransactionInitiator';
 import type { InitiateTransaction } from './common/createTransactionInitiator';
 import { createTransactionStatusFetcher } from './common/createTransactionStatusFetcher';
@@ -24,6 +24,9 @@ type CreateDisbursementAPIResult = {
 
   /** Get the balance of the account */
   getAccountBalance: FetchAccountBalance;
+
+  /** This operation returns personal information of the account holder. The operation does not need any consent by the account holder. */
+  getBasicUserInfo: FetchBasicUserInfo;
 };
 
 type CreateDisbursementAPIOptions = Omit<
@@ -51,7 +54,9 @@ const createDisbursementAPI = (
 
   const getAccountBalance = createAccountBalanceFetcher({ client });
 
-  return { transfer, getTransferStatus, getAccountBalance };
+  const getBasicUserInfo = createBasicUserInfoFetcher({ client });
+
+  return { transfer, getTransferStatus, getAccountBalance, getBasicUserInfo };
 };
 
 export { createDisbursementAPI };
