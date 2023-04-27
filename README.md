@@ -139,6 +139,14 @@ const accessTokenDetails = createAccessToken({
       });
     ```
 
+  - ##### Get Account balance
+    This operation gets the balance of the account and is fully documented [here](https://momodeveloper.mtn.com/docs/services/collection/operations/GetAccountBalance?)
+
+  ```ts
+  // fetch user Account balance
+  const accountBalance = await collectionAPI.getAccountBalance(); // returns the availableBalance and currency
+  ```
+
 - #### **Remittance API**
 
   - ##### Create remittance API
@@ -196,6 +204,14 @@ const accessTokenDetails = createAccessToken({
     });
     ```
 
+    - ##### Get Account balance
+      This operation gets the balance of the account and is fully documented [here](https://momodeveloper.mtn.com/docs/services/remittance/operations/GetAccountBalance?)
+
+    ```ts
+    // fetch user Account balance
+    const accountBalance = await remittanceAPI.getAccountBalance(); // returns the availableBalance and currency
+    ```
+
 - #### **Disbursement API**
 
   - ##### Create disbursement API
@@ -251,4 +267,13 @@ const accessTokenDetails = createAccessToken({
     const transferStatusAndDetails = await disbursementAPI.getTransferStatus({
       referenceId,
     });
+    ```
+
+  - ##### Get Account balance
+
+    This operation gets the balance of the account and is fully documented [here](https://momodeveloper.mtn.com/docs/services/disbursement/operations/GetAccountBalance?)
+
+    ```ts
+    // fetch user Account balance
+    const accountBalance = await disbursementAPI.getAccountBalance(); // returns the availableBalance and currency
     ```
