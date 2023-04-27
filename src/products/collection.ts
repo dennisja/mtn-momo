@@ -2,6 +2,10 @@ import { Product } from '../types';
 
 import { createProductClient } from './common/client';
 import type { CreateProductClientOptions } from './common/client';
+import {
+  FetchAccountBalance,
+  createAccountBalanceFetcher,
+} from './common/createAccountBalanceFetcher';
 import { createTransactionInitiator } from './common/createTransactionInitiator';
 import type { InitiateTransaction } from './common/createTransactionInitiator';
 import { createTransactionStatusFetcher } from './common/createTransactionStatusFetcher';
@@ -25,6 +29,9 @@ type CreateCollectionAPIResult = {
    * This operation is used to get the status of a request to pay
    */
   requestToPayTransactionStatus: FetchTransactionStatus<Product.Collection>;
+
+  /** Get the balance of the account */
+  getAccountBalance: FetchAccountBalance;
 };
 
 /**
@@ -50,7 +57,9 @@ const createCollectionAPI = (
     targetProduct: Product.Collection,
   });
 
-  return { requestToPay, requestToPayTransactionStatus };
+  const getAccountBalance = createAccountBalanceFetcher({ client });
+
+  return { requestToPay, requestToPayTransactionStatus, getAccountBalance };
 };
 
 export { createCollectionAPI };

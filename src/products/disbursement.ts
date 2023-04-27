@@ -2,6 +2,10 @@ import { Product } from '../types';
 
 import { createProductClient } from './common/client';
 import type { CreateProductClientOptions } from './common/client';
+import {
+  FetchAccountBalance,
+  createAccountBalanceFetcher,
+} from './common/createAccountBalanceFetcher';
 import { createTransactionInitiator } from './common/createTransactionInitiator';
 import type { InitiateTransaction } from './common/createTransactionInitiator';
 import { createTransactionStatusFetcher } from './common/createTransactionStatusFetcher';
@@ -17,6 +21,9 @@ type CreateDisbursementAPIResult = {
    * This operation is used to get the status of a transfer.
    */
   getTransferStatus: FetchTransactionStatus<Product.Disbursement>;
+
+  /** Get the balance of the account */
+  getAccountBalance: FetchAccountBalance;
 };
 
 type CreateDisbursementAPIOptions = Omit<
@@ -42,7 +49,9 @@ const createDisbursementAPI = (
     targetProduct: Product.Disbursement,
   });
 
-  return { transfer, getTransferStatus };
+  const getAccountBalance = createAccountBalanceFetcher({ client });
+
+  return { transfer, getTransferStatus, getAccountBalance };
 };
 
 export { createDisbursementAPI };
