@@ -36,16 +36,10 @@ describe.concurrent.each([
     updatedAt: mockUserInfo.updated_at,
   };
   const accountHolderMSISDN = '256779840633';
+  const path = `/${product}/v1_0/accountholder/msisdn/${accountHolderMSISDN}/basicuserinfo`;
 
-  it('should get the account balance', async () => {
-    withAuth(
-      nock(BASE_URL)
-        .get(
-          `/${product}/v1_0/accountholder/msisdn/${accountHolderMSISDN}/basicuserinfo`
-        )
-        .reply(200, mockUserInfo),
-      product
-    );
+  it('should get the user info', async () => {
+    withAuth(nock(BASE_URL).get(path).reply(200, mockUserInfo), product);
 
     const userInfo = await service.getBasicUserInfo({
       accountHolderMSISDN,
@@ -55,22 +49,14 @@ describe.concurrent.each([
 
   it('should throw an error when the api throws an error', async () => {
     withAuth(
-      nock(BASE_URL)
-        .get(
-          `/${product}/v1_0/accountholder/msisdn/${accountHolderMSISDN}/basicuserinfo`
-        )
-        .reply(400, { error: 'Request not understood' }),
+      nock(BASE_URL).get(path).reply(400, { error: 'Request not understood' }),
       product
     );
-    await expect(service.getAccountBalance).rejects.toThrowError();
+    await expect(service.getBasicUserInfo).rejects.toThrowError();
   });
 
   it('should throw an error when authentication fails', async () => {
-    nock(BASE_URL)
-      .get(
-        `/${product}/v1_0/accountholder/msisdn/${accountHolderMSISDN}/basicuserinfo`
-      )
-      .reply(200, mockUserInfo);
-    await expect(service.getAccountBalance).rejects.toThrowError();
+    nock(BASE_URL).get(path).reply(200, mockUserInfo);
+    await expect(service.getBasicUserInfo).rejects.toThrowError();
   });
 });

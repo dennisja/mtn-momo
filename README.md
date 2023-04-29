@@ -140,12 +140,13 @@ const accessTokenDetails = createAccessToken({
     ```
 
   - ##### Get Account balance
+
     This operation gets the balance of the account and is fully documented [here](https://momodeveloper.mtn.com/docs/services/collection/operations/GetAccountBalance?)
 
-  ```ts
-  // fetch user Account balance
-  const accountBalance = await collectionAPI.getAccountBalance(); // returns the availableBalance and currency
-  ```
+    ```ts
+    // fetch user Account balance
+    const accountBalance = await collectionAPI.getAccountBalance(); // returns the availableBalance and currency
+    ```
 
   - ##### Get Basic user info
 
@@ -156,6 +157,21 @@ const accessTokenDetails = createAccessToken({
     const accountBalance = await collectionAPI.getBasicUserInfo({
       accountHolderMSISDN: '256779840633',
     });
+    ```
+
+  - ##### Validate account holder status
+
+    This operation is used to check if an account holder is registered and active in the system and is fully documented [here](https://momodeveloper.mtn.com/docs/services/collection/operations/ValidateAccountHolderStatus?)
+
+    ```ts
+    import { AccountHolderIdVariant } from '@dennisja/mtn-momo';
+
+    // fetch status of the account holder
+    const isActive = await collectionAPI.validateAccountHolderStatus({
+      accountHolderId: '256779840633',
+      accountHolderIdType: AccountHolderIdVariant.msisdn,
+    });
+    console.log({ isActive }); // boolean, true when active, false otherwise
     ```
 
 - #### **Remittance API**
@@ -235,6 +251,21 @@ const accessTokenDetails = createAccessToken({
     });
     ```
 
+  - ##### Validate account holder status
+
+    This operation is used to check if an account holder is registered and active in the system and is fully documented [here](https://momodeveloper.mtn.com/docs/services/remittance/operations/ValidateAccountHolderStatus?)
+
+    ```ts
+    import { AccountHolderIdVariant } from '@dennisja/mtn-momo';
+
+    // fetch status of the account holder
+    const isActive = await remittanceAPI.validateAccountHolderStatus({
+      accountHolderId: '256779840633',
+      accountHolderIdType: AccountHolderIdVariant.msisdn,
+    });
+    console.log({ isActive }); // boolean, true when active, false otherwise
+    ```
+
 - #### **Disbursement API**
 
   - ##### Create disbursement API
@@ -310,4 +341,19 @@ const accessTokenDetails = createAccessToken({
     const accountBalance = await disbursementAPI.getBasicUserInfo({
       accountHolderMSISDN: '256779840633',
     });
+    ```
+
+  - ##### Validate account holder status
+
+    This operation is used to check if an account holder is registered and active in the system and is fully documented [here](https://momodeveloper.mtn.com/docs/services/disbursement/operations/ValidateAccountHolderStatus?)
+
+    ```ts
+    import { AccountHolderIdVariant } from '@dennisja/mtn-momo';
+
+    // fetch status of the account holder
+    const isActive = await disbursementAPI.validateAccountHolderStatus({
+      accountHolderId: '256779840633',
+      accountHolderIdType: AccountHolderIdVariant.msisdn,
+    });
+    console.log({ isActive }); // boolean, true when active, false otherwise
     ```
