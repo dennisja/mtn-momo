@@ -166,7 +166,7 @@ const accessTokenDetails = createAccessToken({
     ```ts
     import { AccountHolderIdVariant } from '@dennisja/mtn-momo';
 
-    // fetch user information associated with the given phone number
+    // fetch status of the account holder
     const isActive = await collectionAPI.validateAccountHolderStatus({
       accountHolderId: '256779840633',
       accountHolderIdType: AccountHolderIdVariant.msisdn,
@@ -258,7 +258,7 @@ const accessTokenDetails = createAccessToken({
     ```ts
     import { AccountHolderIdVariant } from '@dennisja/mtn-momo';
 
-    // fetch user information associated with the given phone number
+    // fetch status of the account holder
     const isActive = await remittanceAPI.validateAccountHolderStatus({
       accountHolderId: '256779840633',
       accountHolderIdType: AccountHolderIdVariant.msisdn,
@@ -350,7 +350,7 @@ const accessTokenDetails = createAccessToken({
     ```ts
     import { AccountHolderIdVariant } from '@dennisja/mtn-momo';
 
-    // fetch user information associated with the given phone number
+    // fetch status of the account holder
     const isActive = await disbursementAPI.validateAccountHolderStatus({
       accountHolderId: '256779840633',
       accountHolderIdType: AccountHolderIdVariant.msisdn,
