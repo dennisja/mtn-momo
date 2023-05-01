@@ -1,7 +1,7 @@
 import { AxiosInstance, HttpStatusCode } from 'axios';
 import { describe, it, vi, expect } from 'vitest';
 
-import { CREATE_API_KEY_UNKNOWN_ERROR, createAPIKey } from '../createAPIKey';
+import { createAPIKey } from '../createAPIKey';
 
 describe('createAPIKey', () => {
   it('should create and return API key', async () => {
@@ -35,21 +35,5 @@ describe('createAPIKey', () => {
         } as unknown as AxiosInstance,
       });
     expect(createAPIKeyFunctionCall).rejects.toThrow(mockAPIKeyError);
-  });
-
-  it('should throw an unknown error when an unknown response is returned from the API is returned', () => {
-    const mocPostMethod = vi.fn(async () => ({}));
-
-    const createAPIKeyFunctionCall = async () =>
-      createAPIKey({
-        userId: 'mockUserId',
-        client: {
-          post: mocPostMethod,
-        } as unknown as AxiosInstance,
-      });
-
-    expect(createAPIKeyFunctionCall).rejects.toThrow(
-      CREATE_API_KEY_UNKNOWN_ERROR
-    );
   });
 });
