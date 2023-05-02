@@ -6,6 +6,8 @@ import { createAccountBalanceFetcher } from './common/createAccountBalanceFetche
 import type { FetchAccountBalance } from './common/createAccountBalanceFetcher';
 import { createBasicUserInfoFetcher } from './common/createGetBasicUserInfo';
 import type { FetchBasicUserInfo } from './common/createGetBasicUserInfo';
+import { createRequestToPayDeliveryNotification } from './common/createRequestToPayDeliveryNotification';
+import type { RequestToPayDeliveryNotification } from './common/createRequestToPayDeliveryNotification';
 import { createTransactionInitiator } from './common/createTransactionInitiator';
 import type { InitiateTransaction } from './common/createTransactionInitiator';
 import { createTransactionStatusFetcher } from './common/createTransactionStatusFetcher';
@@ -32,6 +34,9 @@ type CreateDisbursementAPIResult = {
 
   /** This operation is used to check if an account holder is registered and active in the system. */
   validateAccountHolderStatus: ValidateAccountHolderStatus;
+
+  /** This operation is used to send additional Notification to an End User. */
+  requestToPayDeliveryNotification: RequestToPayDeliveryNotification;
 };
 
 type CreateDisbursementAPIOptions = Omit<
@@ -65,12 +70,16 @@ const createDisbursementAPI = (
     client,
   });
 
+  const requestToPayDeliveryNotification =
+    createRequestToPayDeliveryNotification({ client });
+
   return {
     transfer,
     getTransferStatus,
     getAccountBalance,
     getBasicUserInfo,
     validateAccountHolderStatus,
+    requestToPayDeliveryNotification,
   };
 };
 
