@@ -174,6 +174,21 @@ const accessTokenDetails = createAccessToken({
     console.log({ isActive }); // boolean, true when active, false otherwise
     ```
 
+  - ##### Request to pay delivery notification
+
+    This operation is used to send additional Notification to an End User. and is fully documented [here](https://momodeveloper.mtn.com/docs/services/collection/operations/RequesttoPayDeliveryNotification?)
+
+    > This was tested to work properly with the collection API but fails with the disbursement am remittance API. The cause is unknown even though the documentation for all products is uniform and we generate the method with the same function in the codebase.
+
+    ```ts
+    // send additional notification to end user
+    const { notificationMessage } =
+      await collectionAPI.requestToPayDeliveryNotification({
+        referenceId, // the reference id of the transaction
+        notificationMessage: 'Hello Momo', // custom message you want to send
+      });
+    ```
+
 - #### **Remittance API**
 
   - ##### Create remittance API
@@ -266,6 +281,21 @@ const accessTokenDetails = createAccessToken({
     console.log({ isActive }); // boolean, true when active, false otherwise
     ```
 
+  - ##### Request to pay delivery notification
+
+    This operation is used to send additional Notification to an End User. and is fully documented [here](https://momodeveloper.mtn.com/docs/services/remittance/operations/RequesttoPayDeliveryNotification?)
+
+    > This was tested to work properly with the collection API but fails with the disbursement am remittance API. The cause is unknown even though the documentation for all products is uniform and we generate the method with the same function in the codebase.
+
+    ```ts
+    // send additional notification to end user
+    const { notificationMessage } =
+      await remittanceAPI.requestToPayDeliveryNotification({
+        referenceId, // the reference id of the transaction
+        notificationMessage: 'Hello Momo', // custom message you want to send
+      });
+    ```
+
 - #### **Disbursement API**
 
   - ##### Create disbursement API
@@ -356,4 +386,19 @@ const accessTokenDetails = createAccessToken({
       accountHolderIdType: AccountHolderIdVariant.msisdn,
     });
     console.log({ isActive }); // boolean, true when active, false otherwise
+    ```
+
+  - ##### Request to pay delivery notification
+
+    This operation is used to send additional Notification to an End User. and is fully documented [here](https://momodeveloper.mtn.com/docs/services/disbursement/operations/RequesttoPayDeliveryNotification?)
+
+    > This was tested to work properly with the collection API but fails with the disbursement am remittance API. The cause is unknown even though the documentation for all products is uniform and we generate the method with the same function in the codebase.
+
+    ```ts
+    // send additional notification to end user
+    const { notificationMessage } =
+      await disbursementAPI.requestToPayDeliveryNotification({
+        referenceId, // the reference id of the transaction
+        notificationMessage: 'Hello Momo', // custom message you want to send
+      });
     ```
