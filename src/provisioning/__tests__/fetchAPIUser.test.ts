@@ -19,6 +19,7 @@ describe('fetchAPIUser', () => {
       client,
       userId: mockUserId,
     });
+  const path = `/v1_0/apiuser/${mockUserId}`;
 
   it('should create an api user and return the user details', async () => {
     vi.spyOn(uuid, 'v4').mockReturnValueOnce(mockUserId);
@@ -26,18 +27,14 @@ describe('fetchAPIUser', () => {
       targetEnvironment: TargetEnvironment.Sandbox,
       providerCallbackHost: 'localhost',
     };
-    nock(BASE_URL)
-      .get(`/v1_0/apiuser/${mockUserId}`)
-      .reply(HttpStatusCode.Created, mockResult);
+    nock(BASE_URL).get(path).reply(HttpStatusCode.Created, mockResult);
     const userDetails = await fetchUser();
     expect(userDetails).toEqual(mockResult);
   });
 
   it('should throw an error when api throws an error', async () => {
     vi.spyOn(uuid, 'v4').mockReturnValueOnce(mockUserId);
-    nock(BASE_URL)
-      .get(`/v1_0/apiuser/${mockUserId}`)
-      .reply(HttpStatusCode.BadRequest, '');
+    nock(BASE_URL).get(path).reply(HttpStatusCode.BadRequest, '');
     await expect(fetchUser).rejects.toThrowError();
   });
 });
