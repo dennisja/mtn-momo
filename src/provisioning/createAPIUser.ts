@@ -1,4 +1,4 @@
-import { AxiosInstance, HttpStatusCode } from 'axios';
+import { AxiosInstance } from 'axios';
 import { v4 } from 'uuid';
 
 type CreateAPIUserOptions = {
