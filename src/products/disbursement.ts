@@ -3,7 +3,10 @@ import { Product } from '../types';
 import { createProductClient } from './common/client';
 import type { CreateProductClientOptions } from './common/client';
 import { createAccountBalanceFetcher } from './common/createAccountBalanceFetcher';
-import type { FetchAccountBalance } from './common/createAccountBalanceFetcher';
+import type {
+  FetchAccountBalance,
+  FetchAccountBalanceInSpecificCurrency,
+} from './common/createAccountBalanceFetcher';
 import { createBasicUserInfoFetcher } from './common/createGetBasicUserInfo';
 import type { FetchBasicUserInfo } from './common/createGetBasicUserInfo';
 import { createTransactionInitiator } from './common/createTransactionInitiator';
@@ -26,6 +29,9 @@ type CreateDisbursementAPIResult = {
 
   /** Get the balance of the account */
   getAccountBalance: FetchAccountBalance;
+
+  /** Get the balance of the account in a specific currency */
+  getAccountBalanceInSpecificCurrency: FetchAccountBalanceInSpecificCurrency;
 
   /** This operation returns personal information of the account holder. The operation does not need any consent by the account holder. */
   getBasicUserInfo: FetchBasicUserInfo;
@@ -59,6 +65,10 @@ const createDisbursementAPI = (
 
   const getAccountBalance = createAccountBalanceFetcher({ client });
 
+  const getAccountBalanceInSpecificCurrency = createAccountBalanceFetcher({
+    client,
+  });
+
   const getBasicUserInfo = createBasicUserInfoFetcher({ client });
 
   const validateAccountHolderStatus = createValidateAccountHolderStatus({
@@ -71,6 +81,7 @@ const createDisbursementAPI = (
     getAccountBalance,
     getBasicUserInfo,
     validateAccountHolderStatus,
+    getAccountBalanceInSpecificCurrency,
   };
 };
 

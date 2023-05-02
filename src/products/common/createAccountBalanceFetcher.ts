@@ -1,4 +1,5 @@
 import { AxiosInstance } from 'axios';
+import { urlPathFrom } from '../../client';
 
 type CreateAccountBalanceFetcherOptions = {
   /** The client to fetch the account balance */
@@ -15,12 +16,18 @@ type AccountBalance = {
 
 type FetchAccountBalance = () => Promise<AccountBalance>;
 
+type FetchAccountBalanceInSpecificCurrency = (
+  options: Pick<AccountBalance, 'currency'>
+) => Promise<AccountBalance>;
+
 const createAccountBalanceFetcher =
   ({ client }: CreateAccountBalanceFetcherOptions) =>
-  async () => {
-    const { data } = await client.get<AccountBalance>('/account/balance');
+  async (options?: { currency: string }) => {
+    const currency = options?.currency || '';
+    const path = urlPathFrom(['/account', 'balance', currency]);
+    const { data } = await client.get<AccountBalance>(path);
     return data;
   };
 
 export { createAccountBalanceFetcher };
-export type { FetchAccountBalance };
+export type { FetchAccountBalance, FetchAccountBalanceInSpecificCurrency };
