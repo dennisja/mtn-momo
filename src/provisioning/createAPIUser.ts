@@ -25,17 +25,13 @@ const createAPIUser = async ({
 }: CreateAPIUserOptions): Promise<CreateAPIUserResult> => {
   const userId = v4();
 
-  const response = await client.post(
+  await client.post(
     '',
     { providerCallbackHost },
     { headers: { 'X-Reference-Id': userId } }
   );
 
-  if (response.status === HttpStatusCode.Created) {
-    return { userId };
-  }
-
-  throw new Error('Unknown error occurred when creating a user');
+  return { userId };
 };
 
 export { createAPIUser };

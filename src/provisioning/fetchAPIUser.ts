@@ -1,4 +1,4 @@
-import { AxiosInstance, HttpStatusCode } from 'axios';
+import { AxiosInstance } from 'axios';
 import type { TargetEnvironment } from '../types';
 
 type FetchAPIUserOptions = {
@@ -26,14 +26,9 @@ const fetchAPIUser = async ({
   userId,
   client,
 }: FetchAPIUserOptions): Promise<FetchAPIUserResult> => {
-  const res = await client.get<FetchAPIUserResult>(`/${userId}`);
+  const { data } = await client.get<FetchAPIUserResult>(`/${userId}`);
 
-  if (res.status === HttpStatusCode.Ok) {
-    return res.data;
-  }
-
-  /** TODO: search and see whether there is a reasonable way to do error handling from the docus */
-  throw new Error('Unknown error when fetching user');
+  return data;
 };
 
 export { fetchAPIUser };
