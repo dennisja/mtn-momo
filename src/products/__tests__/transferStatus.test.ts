@@ -1,6 +1,5 @@
 import nock from 'nock';
-import * as uuid from 'uuid';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { BASE_URL, urlPathFrom } from '../../client';
 import { Product } from '../../types';
@@ -11,7 +10,6 @@ import {
 } from './services';
 import { withAuth } from './testUtils';
 import { TRANSACTION_URL_PATHS } from '../common/utils';
-import { PartyIDVariant } from '../common/types';
 
 describe.concurrent.each([
   { product: Product.Disbursement, service: disbursementService },
@@ -59,7 +57,7 @@ describe.concurrent.each([
   });
 });
 
-describe.concurrent('requestToPay', () => {
+describe.concurrent('requestToPayTransactionStatus', () => {
   const mockReferenceId = 'mockReferenceId';
   const path = urlPathFrom([
     `/collection`,
