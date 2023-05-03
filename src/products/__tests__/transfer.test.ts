@@ -24,35 +24,44 @@ describe.concurrent.each([
   ]);
   const mockReferenceId = 'mockReferenceId';
   vi.spyOn(uuid, 'v4').mockReturnValue(mockReferenceId);
-  const transact = () =>
-    service.transfer({
-      amount: '15000',
-      currency: 'UGX',
-      externalId: '123456789',
-      payee: {
-        partyIdType: PartyIDVariant.MSISDN,
-        partyId: '256759840633',
-      },
-      payerMessage: 'message',
-      payeeNote: 'note',
-    });
+  const transactionPayload = {
+    amount: '15000',
+    currency: 'UGX',
+    externalId: '123456789',
+    payee: {
+      partyIdType: PartyIDVariant.MSISDN,
+      partyId: '256759840633',
+    },
+    payerMessage: 'message',
+    payeeNote: 'note',
+  };
+  const transact = () => service.transfer(transactionPayload);
 
   it('should make a transfer and return the referenceId of the transaction', async () => {
-    withAuth(nock(BASE_URL).post(path).reply(200, ''), product);
+    withAuth(
+      nock(BASE_URL)
+        .post(path, JSON.stringify(transactionPayload))
+        .reply(200, ''),
+      product
+    );
     const { referenceId } = await transact();
     expect(referenceId).toEqual(mockReferenceId);
   });
 
   it('should throw an error when the api throws an error', async () => {
     withAuth(
-      nock(BASE_URL).post(path).reply(400, { error: 'Request not understood' }),
+      nock(BASE_URL)
+        .post(path, JSON.stringify(transactionPayload))
+        .reply(400, { error: 'Request not understood' }),
       product
     );
     await expect(transact).rejects.toThrowError();
   });
 
   it('should throw an error when authentication fails', async () => {
-    nock(BASE_URL).post(path).reply(200, '');
+    nock(BASE_URL)
+      .post(path, JSON.stringify(transactionPayload))
+      .reply(200, '');
     await expect(transact).rejects.toThrowError();
   });
 });
@@ -66,35 +75,42 @@ describe.concurrent('requestToPay', () => {
 
   const mockReferenceId = 'mockReferenceId';
   vi.spyOn(uuid, 'v4').mockReturnValue(mockReferenceId);
-
-  const requestToPay = () =>
-    collectionService.requestToPay({
-      amount: '1000',
-      currency: 'EUR',
-      externalId: '012345678',
-      payer: {
-        partyIdType: PartyIDVariant.MSISDN,
-        partyId: '256779840633',
-      },
-      payerMessage: 'message',
-      payeeNote: 'note',
-    });
+  const transactionPayload = {
+    amount: '1000',
+    currency: 'EUR',
+    externalId: '012345678',
+    payer: {
+      partyIdType: PartyIDVariant.MSISDN,
+      partyId: '256779840633',
+    },
+    payerMessage: 'message',
+    payeeNote: 'note',
+  };
+  const requestToPay = () => collectionService.requestToPay(transactionPayload);
 
   it('should make a a requestToPay and return the referenceId of the transaction', async () => {
-    withAuth(nock(BASE_URL).post(path).reply(200, ''));
+    withAuth(
+      nock(BASE_URL)
+        .post(path, JSON.stringify(transactionPayload))
+        .reply(200, '')
+    );
     const { referenceId } = await requestToPay();
     expect(referenceId).toEqual(mockReferenceId);
   });
 
   it('should throw an error when the api throws an error', async () => {
     withAuth(
-      nock(BASE_URL).post(path).reply(400, { error: 'Request not understood' })
+      nock(BASE_URL)
+        .post(path, JSON.stringify(transactionPayload))
+        .reply(400, { error: 'Request not understood' })
     );
     await expect(requestToPay).rejects.toThrowError();
   });
 
   it('should throw an error when authentication fails', async () => {
-    nock(BASE_URL).post(path).reply(200, '');
+    nock(BASE_URL)
+      .post(path, JSON.stringify(transactionPayload))
+      .reply(200, '');
     await expect(requestToPay).rejects.toThrowError();
   });
 });

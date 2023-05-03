@@ -2,8 +2,8 @@ import nock from 'nock';
 import { describe, expect, it } from 'vitest';
 
 import { BASE_URL } from '../../client';
-import { AccountHolderIdVariant } from '../common/createValidateAccountHolderStatus';
 import { Product } from '../../types';
+import { AccountHolderIdVariant } from '../common/createValidateAccountHolderStatus';
 
 import {
   collectionService,
