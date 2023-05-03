@@ -1,5 +1,5 @@
 {
-  "name": "@dennisja/mtn-momo",
+  "name": "mtn-momo-client",
   "version": "0.1.0",
   "description": "A collection of utils to interact with the mtn-momo api",
   "source": "src/index.ts",
