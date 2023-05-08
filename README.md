@@ -4,24 +4,22 @@ A collection of utils to interact with the mtn momo api
 
 ## Installation
 
-> Note: package not published yet and the name is subject to change
-
 - With yarn
 
 ```bash
-yarn add @dennisja/mtn-momo
+yarn add mtn-momo-client
 ```
 
 - With npm
 
 ```bash
-npm install @dennisja/mtn-momo
+npm install mtn-momo-client
 ```
 
 - With pnpm
 
 ```bash
-pnpm install @dennisja/mtn-momo
+pnpm install mtn-momo-client
 ```
 
 ## Functionalities
@@ -37,7 +35,7 @@ This is needed when developing to get the credentials you will use when getting 
 **Usage**
 
 ```js
-import { createAPIUserAndKey } from '@dennisja/mtn-momo';
+import { createAPIUserAndKey } from 'mtn-momo-client';
 
 const subscriptionKey =
   'the subscription key of the product as explained above';
@@ -68,7 +66,7 @@ data = {
   This is a token you can use to access other endpoints of the API. You can create an access token for each product by using the `createAccessToken` method. You will barely use this method as creating and regenerating a token when the created one is expired is dealt with by the [API endpoint utilities](#api-endpoints).
 
 ```js
-import { createAccessToken, TargetEnvironment } from '@dennisja/mtn-momo';
+import { createAccessToken, TargetEnvironment } from 'mtn-momo-client';
 
 const accessTokenDetails = createAccessToken({
   userId: 'the api user id',
@@ -88,10 +86,7 @@ const accessTokenDetails = createAccessToken({
     Create the methods you will use to access the collection api endpoints. Each end point has a corresponding method to talk to it.
 
     ```ts
-    import {
-      createAPIUserAndKey,
-      createCollectionAPI,
-    } from '@dennisja/mtn-momo';
+    import { createAPIUserAndKey, createCollectionAPI } from 'mtn-momo-client';
 
     const collectionPrimaryKey =
       'The collection api subscription primary key found in your dashboard';
@@ -112,7 +107,7 @@ const accessTokenDetails = createAccessToken({
     This operation is used to request a payment from a consumer (Payer) and is fully documented [here](https://momodeveloper.mtn.com/docs/services/collection/operations/RequesttoPay?). Gets back a referenceId you can use to fetch the transaction status.
 
     ```ts
-    import { PartyIDVariant } from '@dennisja/mtn-momo';
+    import { PartyIDVariant } from 'mtn-momo-client';
 
     const { referenceId } = await collectionAPI.requestToPay({
       amount: '1000',
@@ -164,7 +159,7 @@ const accessTokenDetails = createAccessToken({
     This operation is used to check if an account holder is registered and active in the system and is fully documented [here](https://momodeveloper.mtn.com/docs/services/collection/operations/ValidateAccountHolderStatus?)
 
     ```ts
-    import { AccountHolderIdVariant } from '@dennisja/mtn-momo';
+    import { AccountHolderIdVariant } from 'mtn-momo-client';
 
     // fetch status of the account holder
     const isActive = await collectionAPI.validateAccountHolderStatus({
@@ -196,10 +191,7 @@ const accessTokenDetails = createAccessToken({
     Create the methods you will use to access the remittance api endpoints. Each end point has a corresponding method to talk to it.
 
     ```ts
-    import {
-      createAPIUserAndKey,
-      createRemittanceAPI,
-    } from '@dennisja/mtn-momo';
+    import { createAPIUserAndKey, createRemittanceAPI } from 'mtn-momo-client';
 
     const remittancePrimaryKey =
       'The remittance api subscription primary key found in your dashboard';
@@ -220,7 +212,7 @@ const accessTokenDetails = createAccessToken({
     Transfer operation is used to transfer an amount from the own account to a payee account and is fully documented [here](https://momodeveloper.mtn.com/docs/services/remittance/operations/Transfer?). Gets back a referenceId you can use to fetch the transaction status.
 
     ```ts
-    import { PartyIDVariant } from '@dennisja/mtn-momo';
+    import { PartyIDVariant } from 'mtn-momo-client';
 
     const { referenceId } = await remittanceAPI.transfer({
       amount: '1000',
@@ -271,7 +263,7 @@ const accessTokenDetails = createAccessToken({
     This operation is used to check if an account holder is registered and active in the system and is fully documented [here](https://momodeveloper.mtn.com/docs/services/remittance/operations/ValidateAccountHolderStatus?)
 
     ```ts
-    import { AccountHolderIdVariant } from '@dennisja/mtn-momo';
+    import { AccountHolderIdVariant } from 'mtn-momo-client';
 
     // fetch status of the account holder
     const isActive = await remittanceAPI.validateAccountHolderStatus({
@@ -306,7 +298,7 @@ const accessTokenDetails = createAccessToken({
     import {
       createAPIUserAndKey,
       createDisbursementAPI,
-    } from '@dennisja/mtn-momo';
+    } from 'mtn-momo-client';
 
     const disbursementPrimaryKey =
       'The disbursement api subscription primary key found in your dashboard';
@@ -327,7 +319,7 @@ const accessTokenDetails = createAccessToken({
     Transfer operation is used to transfer an amount from the own account to a payee account and is fully documented [here](https://momodeveloper.mtn.com/docs/services/disbursement/operations/Transfer?). Gets back a referenceId you can use to fetch the transaction status.
 
     ```ts
-    import { PartyIDVariant } from '@dennisja/mtn-momo';
+    import { PartyIDVariant } from 'mtn-momo-client';
 
     const { referenceId } = await disbursementAPI.transfer({
       amount: '1000',
@@ -378,7 +370,7 @@ const accessTokenDetails = createAccessToken({
     This operation is used to check if an account holder is registered and active in the system and is fully documented [here](https://momodeveloper.mtn.com/docs/services/disbursement/operations/ValidateAccountHolderStatus?)
 
     ```ts
-    import { AccountHolderIdVariant } from '@dennisja/mtn-momo';
+    import { AccountHolderIdVariant } from 'mtn-momo-client';
 
     // fetch status of the account holder
     const isActive = await disbursementAPI.validateAccountHolderStatus({
