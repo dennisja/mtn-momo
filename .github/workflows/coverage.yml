@@ -1,0 +1,27 @@
+name: Test Coverage
+
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:
+      - 'main'
+
+jobs:
+  lint-tsc-test:
+    name: Lint, Type check and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@main
+
+      - name: Setup Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Install Dependencies
+        run: yarn
+
+      - name: Test
+        run: yarn test:ci:coverage

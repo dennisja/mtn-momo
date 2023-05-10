@@ -2,6 +2,8 @@
 
 A collection of utils to interact with the mtn momo api
 
+![Tests](https://github.com/dennisja/mtn-momo/actions/workflows/coverage.yml/badge.svg)
+
 ## Installation
 
 - With yarn
