@@ -2,6 +2,8 @@
 
 A collection of utils to interact with the mtn momo api
 
+![Tests](https://github.com/dennisja/mtn-momo/actions/workflows/coverage.yml/badge.svg) [![Test Coverage](https://api.codeclimate.com/v1/badges/edd2089e3e514c6f5d98/test_coverage)](https://codeclimate.com/github/dennisja/mtn-momo/test_coverage)
+
 ## Installation
 
 - With yarn
