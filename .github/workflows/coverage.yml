@@ -1,4 +1,4 @@
-name: Test Coverage
+name: Run tests and report coverage
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
       - 'main'
 
 jobs:
-  lint-tsc-test:
-    name: Lint, Type check and test
+  run-tests-and-report-coverage:
+    name: Run tests and reports coverage
     runs-on: ubuntu-latest
 
     steps:
@@ -25,3 +25,11 @@ jobs:
 
       - name: Test
         run: yarn test:ci:coverage
+
+      - name: Report code coverage
+        uses: paambaati/codeclimate-action@v4.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageLocations: |
+            ${{github.workspace}}/*.lcov:lcov
